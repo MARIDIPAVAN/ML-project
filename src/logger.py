@@ -1,18 +1,28 @@
-import logging
-import os
+import os,sys
+from os.path import dirname,join,abspath
+
+sys.path.insert(0,abspath(join(dirname(__file__),'..')))
+
+
+import logging,os
 from datetime import datetime
 
-LOG_FILE=f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
-logs_path=os.path.join(os.getcwd(),"logs",LOG_FILE)
-os.makedirs(logs_path,exist_ok=True)
+#create a path for the directory to hold logs
+LOG_PATH=os.path.join(os.getcwd(),"logs")
 
-LOG_FILE_PATH=os.path.join(logs_path,LOG_FILE)
+#create the directory
+os.makedirs(LOG_PATH,exist_ok=True)
 
-logging.basicConfig(
-    filename=LOG_FILE_PATH,
-    format="[ %(asctime)s ] %(lineno)d %(name)s - %(levelname)s - %(message)s",
-    level=logging.INFO,
+#specify the name of the log
+LOG_FILE_NAME=f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
 
+#specify the log file path
+LOG_FILE_PATH=os.path.join(LOG_PATH,LOG_FILE_NAME)
 
-)
+#config the logger
+logging.basicConfig(filename=LOG_FILE_PATH,
+                    level=logging.INFO,
+                    format='%(asctime)s - %(name)s -  %(levelname)s - %(message)s)')
 
+#if __name__=="__main__":
+#    logging.info("logging had done")
