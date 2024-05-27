@@ -10,13 +10,14 @@ from sklearn.model_selection import train_test_split
 from src.logger import logging
 from src.exception import CustomException
 from dataclasses import dataclass
-
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
 
 #initialize the data ingestion configuration
 @dataclass
 class DataIngestionConfig():
     #defining class attributes
-    data_path=os.path.join(os.getcwd(),"notebook","SMSSpamCollection.csv")
+    data_path=os.path.join(os.getcwd(),"notebook","spamhamclassifier.csv")
     train_path=os.path.join(os.getcwd(),"artifacts","train.csv")
     test_path=os.path.join(os.getcwd(),"artifacts","test.csv")
     raw_path=os.path.join(os.getcwd(),"artifacts","raw.csv")
@@ -67,4 +68,9 @@ class DataIngestion():
             
 
 obj=DataIngestion()
-obj.initiate_data_ingestion()
+train_data, test_data=obj.initiate_data_ingestion()
+
+data_transformation=DataTransformation()
+data_transformation.initiateDataTransformation(train_data,test_data)
+
+
