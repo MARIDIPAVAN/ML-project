@@ -8,6 +8,8 @@ from src.logger import logging
 from src.exception import CustomException
 from src.utils import save_obj
 from dataclasses import dataclass
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
 
 import pandas as pd
 import numpy as np
@@ -73,8 +75,8 @@ class DataTransformation:
             logging.info('Test data read successfully')
             
             # Debug: Print the columns to check if 'label' and 'message' exist
-            print("Train DataFrame Columns:", train_df.columns)
-            print("Test DataFrame Columns:", test_df.columns)
+            #print("Train DataFrame Columns:", train_df.columns)
+            #print("Test DataFrame Columns:", test_df.columns)
             
             # Split dependent and independent features
             if 'label' not in train_df.columns or 'message' not in train_df.columns:
@@ -122,4 +124,7 @@ class DataTransformation:
 train_path = "C:/Users/pavan/projects/spam classifier/artifacts/train.csv"
 test_path = "C:/Users/pavan/projects/spam classifier/artifacts/test.csv"
 data_transformation = DataTransformation()
-data_transformation.initiateDataTransformation(train_path, test_path)
+train_arr,test_arr=data_transformation.initiateDataTransformation(train_path, test_path)
+
+modeltrainer=ModelTrainer()
+modeltrainer.initiateModelTrainer(train_arr,test_arr)

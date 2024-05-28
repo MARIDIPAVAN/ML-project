@@ -67,10 +67,9 @@ class DataIngestion():
             print('Data Ingestion is performed')
             
 
-obj=DataIngestion()
-train_data, test_data=obj.initiate_data_ingestion()
+#obj=DataIngestion()
+#obj.initiate_data_ingestion()
 
-data_transformation=DataTransformation()
-data_transformation.initiateDataTransformation(train_data,test_data)
+
 
 
