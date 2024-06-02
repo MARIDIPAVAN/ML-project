@@ -37,7 +37,7 @@ class ModelTrainer:
             
             # Specify the models
             models = {
-                'LogisticRegression': LogisticRegression(),
+                #'LogisticRegression': LogisticRegression(),
                 'DecisionTreeClassifier': DecisionTreeClassifier(),
                 'RandomForestClassifier': RandomForestClassifier(),
                 'GradientBoostingClassifier': GradientBoostingClassifier()

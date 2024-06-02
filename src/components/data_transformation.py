@@ -36,16 +36,10 @@ class DataTransformation:
         
     def getPreprocessorObject(self):
         # Define the categorical and text columns
-        categorical_cols = ['label']
+    
         text_col = 'message'
         
-        # Categorical Pipeline
-        cat_pipeline = Pipeline(
-            steps=[
-                ('imputer', SimpleImputer(strategy='most_frequent')),
-                ('ordinal_encoder', OrdinalEncoder()),
-            ]
-        )
+       
 
         # Text Pipeline
         text_pipeline = Pipeline(
@@ -56,7 +50,6 @@ class DataTransformation:
 
         preprocessor = ColumnTransformer(
             transformers=[
-                ('cat_pipeline', cat_pipeline, categorical_cols),
                 ('text_pipeline', text_pipeline, text_col)
             ]
         )
@@ -82,8 +75,8 @@ class DataTransformation:
             if 'label' not in train_df.columns or 'message' not in train_df.columns:
                 raise KeyError("Columns 'label' and 'message' must be present in the data")
 
-            X_train = train_df[['message', 'label']]
-            X_test = test_df[['message', 'label']]
+            X_train = train_df[['label', 'message']]
+            X_test = test_df[['label', 'message']]
             y_train = train_df['label']
             y_test = test_df['label']
             logging.info('Splitting of dependent and independent features is successful')
